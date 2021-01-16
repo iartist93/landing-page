@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  font-family: "Special Elite", serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+section img {
+  width: 100%;
+}
+
+header h1 {
+  font-size: 120px;
+  text-align: center;
+}
+
+nav ul {
+  background-color: black;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  vertical-align: middle;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  list-style: none;
+}
+
+nav li {
+  padding-top: 10px;
+  flex-flow: wrap row;
+  font-size: 25px;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+li a {
+  text-decoration: none;
+  color: rgb(243, 115, 115);
+}

@@ -84,6 +84,7 @@ const navItemClicked = (index) => {
       sections[i].classList.remove("active_section");
       navitems[i].classList.remove("active_nav_item");
     }
+    sections[index].scrollIntoView(true);
   }
 };
 
@@ -94,7 +95,10 @@ for (let i = 0; i < sectionList.length; i++) {
   if (i == 0) {
     navItem.classList.add("active_nav_item");
   }
-  navItem.addEventListener("click", () => navItemClicked(i));
+  navItem.addEventListener("click", (event) => {
+    event.preventDefault();
+    navItemClicked(i);
+  });
   navDocumentFragment.appendChild(navItem);
 }
 ul.appendChild(navDocumentFragment);

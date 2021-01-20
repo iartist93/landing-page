@@ -1,3 +1,7 @@
+///////////////////////////////////////////////////////////
+// Sections
+//////////////
+
 /**  Create a new section and append image to it
  * @param {String} imageURL relative path to the image, or web URL
  * @param {String} title alt of the image
@@ -13,7 +17,7 @@ const createSectionWithImage = (imageURL, title) => {
 };
 
 // database
-const sections = [
+const sectionList = [
   { title: "AOT S01 E01", image: "/images/s01_e01.png" },
   { title: "AOT S01 E02", image: "/images/s01_e02.png" },
   { title: "AOT S01 E03", image: "/images/s01_e03.png" },
@@ -24,8 +28,12 @@ const sections = [
 const sectionDocumentFragment = new DocumentFragment();
 
 // create the page sections for each image in the images list
-for (const section of sections) {
+for (let i = 0; i < sectionList.length; i++) {
+  const section = sectionList[i];
   let sectionElement = createSectionWithImage(section.image, section.title);
+  if (i == 0) {
+    sectionElement.classList.add("active_section");
+  }
   sectionDocumentFragment.appendChild(sectionElement);
 }
 
@@ -36,6 +44,8 @@ const main = document.querySelector("main");
 main.append(sectionDocumentFragment);
 
 ///////////////////////////////////////////////////////////
+// Nav bar
+///////////
 
 const header = document.querySelector("header");
 const nav = document.createElement("nav");
@@ -52,6 +62,7 @@ nav.appendChild(ul);
  */
 const createNavbarItem = (url, lable) => {
   const navItem = document.createElement("li");
+  navItem.classList.add("nav_item");
   const link = document.createElement("a");
   link.textContent = lable;
   link.setAttribute("href", url);
@@ -59,10 +70,35 @@ const createNavbarItem = (url, lable) => {
   return navItem;
 };
 
-for (const section of sections) {
+const navItemClicked = (index) => {
+  // query the section with this index
+  const sections = document.querySelectorAll("section");
+  const navitems = document.querySelectorAll(".nav_item");
+
+  // toggle the active class on it
+  for (let i = 0; i < sections.length; i++) {
+    if (i == index) {
+      sections[i].classList.add("active_section");
+      navitems[i].classList.add("active_nav_item");
+    } else {
+      sections[i].classList.remove("active_section");
+      navitems[i].classList.remove("active_nav_item");
+    }
+  }
+};
+
+//TODO:Refactor and use delgetion instead
+for (let i = 0; i < sectionList.length; i++) {
+  let section = sectionList[i];
   const navItem = createNavbarItem("#", section.title);
+  if (i == 0) {
+    navItem.classList.add("active_nav_item");
+  }
+  navItem.addEventListener("click", () => navItemClicked(i));
   navDocumentFragment.appendChild(navItem);
 }
 ul.appendChild(navDocumentFragment);
 nav.appendChild(ul);
 header.appendChild(nav);
+
+///////////////////////////////////////////////////////////

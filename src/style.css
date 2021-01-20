@@ -17,13 +17,18 @@ header h1 {
   text-align: center;
 }
 
-nav ul {
-  background-color: black;
-  color: white;
-  margin-bottom: 20px;
+nav {
+  margin: 0 auto;
   text-align: center;
+  width: 900px;
+}
+
+nav ul {
+  text-align: center;
+  background-color: black;
+  color: rgb(5, 4, 4);
   vertical-align: middle;
-  height: 40px;
+  height: 45px;
   width: 100%;
   display: flex;
   list-style: none;
@@ -35,9 +40,34 @@ nav li {
   font-size: 25px;
   margin-right: 20px;
   text-decoration: none;
+  color: rgb(243, 115, 115);
 }
 
 li a {
   text-decoration: none;
-  color: rgb(243, 115, 115);
+  color: inherit;
+}
+
+.active_nav_item {
+  color: yellow;
+}
+
+.active_section {
+  color: red;
+}
+
+@media screen and (max-width: 580px) {
+  ul li {
+    padding-top: 9px;
+    font-size: 17px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 580px) and (max-width: 800px) {
+  ul li {
+    padding-top: 14px;
+    font-size: 22px;
+    margin-right: 22px;
+  }
 }

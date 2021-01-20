@@ -84,7 +84,7 @@ const navItemClicked = (index) => {
       sections[i].classList.remove("active_section");
       navitems[i].classList.remove("active_nav_item");
     }
-    sections[index].scrollIntoView(true);
+    sections[index].scrollIntoView();
   }
 };
 

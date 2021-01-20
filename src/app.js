@@ -3,10 +3,10 @@
 //////////////
 
 const sectionList = [
-  { title: "S01 E01", image: "/images/s01_e01.png" },
-  { title: "S01 E02", image: "/images/s01_e02.png" },
-  { title: "S01 E03", image: "/images/s01_e03.png" },
-  { title: "S01 E04", image: "/images/s01_e04.png" },
+  { title: "Epsoid 01", image: "/images/s01_e01.png" },
+  { title: "Epsoid 02", image: "/images/s01_e02.png" },
+  { title: "Epsoid 03", image: "/images/s01_e03.png" },
+  { title: "Epsoid 04", image: "/images/s01_e04.png" },
 ];
 
 ///////////////////////////////////////////////////////////
@@ -194,4 +194,10 @@ main.addEventListener("scroll", (e) => {
     }
   }
   setActiveSection(index);
+});
+
+const title = document.querySelector(".text_container_title");
+title.addEventListener("click", () => {
+  const content = document.querySelector(".test_container_content");
+  content.classList.toggle("test_container_toggle");
 });

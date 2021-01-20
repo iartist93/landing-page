@@ -9,13 +9,21 @@ const sectionList = [
   { title: "S01 E04", image: "/images/s01_e04.png" },
 ];
 
-let activeIndex = 0;
-
 ///////////////////////////////////////////////////////////
 // initalizations
 //////////////
 
 document.querySelector(".back_top").classList.add("btn_hidden");
+
+// Queries
+const main = document.querySelector("main");
+const header = document.querySelector("header");
+const nav = document.querySelector("nav");
+const nav_ul = document.querySelector("nav ul");
+
+let activeIndex = 0;
+let sections = [];
+let navitems = [];
 
 ///////////////////////////////////////////////////////////
 // Helper Functions
@@ -28,6 +36,7 @@ document.querySelector(".back_top").classList.add("btn_hidden");
  */
 const createSectionWithImage = (imageURL, title) => {
   const section = document.createElement("section");
+  section.classList.add("img_section_item");
   const image = document.createElement("img");
   image.setAttribute("src", imageURL);
   image.setAttribute("atl", title);
@@ -50,12 +59,38 @@ const createNavbarItem = (url, lable) => {
   return navItem;
 };
 
+const getElements = () => {
+  if (sections.length == 0) {
+    // query the section with this index
+    sections = document.querySelectorAll(".img_section_item");
+    navitems = document.querySelectorAll(".nav_item");
+  }
+};
+
+const setActiveSectionAndScroll = (index) => {
+  if (index != activeIndex) {
+    setActiveSection(index);
+    sections[index].scrollIntoView(true);
+  }
+};
+
+const setActiveSection = (index) => {
+  if (index != activeIndex) {
+    getElements();
+    // toggle the active class on it
+    sections[activeIndex].classList.remove("active_section");
+    navitems[activeIndex].classList.remove("active_nav_item");
+
+    sections[index].classList.add("active_section");
+    navitems[index].classList.add("active_nav_item");
+
+    activeIndex = index;
+  }
+};
+
 ///////////////////////////////////////////////////////////
 // Sections
 //////////////
-
-// get main tag
-const main = document.querySelector("main");
 
 // create a new fragment to hold the sections
 const sectionDocumentFragment = new DocumentFragment();
@@ -77,36 +112,7 @@ main.append(sectionDocumentFragment);
 // Nav bar
 ///////////
 
-const header = document.querySelector("header");
-const nav = document.createElement("nav");
-const ul = document.createElement("ul");
-ul.setAttribute("class", "main_nav");
-nav.appendChild(ul);
 const navDocumentFragment = new DocumentFragment();
-
-const setActiveSectionAndScroll = (index) => {
-  if (index != activeIndex) {
-    setActiveSection(index);
-    sections[index].scrollIntoView(true);
-  }
-};
-
-const setActiveSection = (index) => {
-  if (index != activeIndex) {
-    // query the section with this index
-    const sections = document.querySelectorAll("section");
-    const navitems = document.querySelectorAll(".nav_item");
-
-    // toggle the active class on it
-    sections[activeIndex].classList.remove("active_section");
-    navitems[activeIndex].classList.remove("active_nav_item");
-
-    sections[index].classList.add("active_section");
-    navitems[index].classList.add("active_nav_item");
-
-    activeIndex = index;
-  }
-};
 
 //TODO:Refactor and use delgetion instead
 for (let i = 0; i < sectionList.length; i++) {
@@ -117,14 +123,12 @@ for (let i = 0; i < sectionList.length; i++) {
   }
   navItem.addEventListener("click", (event) => {
     event.preventDefault();
-    // setActiveNavItem(i);
     setActiveSectionAndScroll(i);
   });
   navDocumentFragment.appendChild(navItem);
 }
-ul.appendChild(navDocumentFragment);
-nav.appendChild(ul);
-header.appendChild(nav);
+
+nav_ul.appendChild(navDocumentFragment);
 
 ///////////////////////////////////////////////////////////
 // Back to Top Button
@@ -140,39 +144,37 @@ backTopBtn.addEventListener("click", () => {
 // Active Section on scrolling
 ////////////////////////////////
 
-const sections = document.querySelectorAll("section");
-const sectionsList = Array.from(sections);
-
 const ScrollDirections = {
-  up: 1,
-  down: 0,
+  right: 1,
+  left: 0,
 };
 
-let currentOffset = main.scrollTop;
-let scrollDirection = ScrollDirections.down;
+let currentOffset = main.scrollLeft;
+let scrollDirection = ScrollDirections.right;
 
 let isScrolling;
 
 main.addEventListener("scroll", (e) => {
+  getElements();
   window.clearTimeout(isScrolling);
   document.querySelector("nav").classList.add("nav_hidden");
 
   isScrolling = window.setTimeout(() => {
     document.querySelector("nav").classList.remove("nav_hidden");
-    console.log("Hidden");
-  }, 300);
+  }, 200);
 
-  const offset = main.scrollTop;
+  const offset = main.scrollLeft;
   if (offset > currentOffset) {
-    scrollDirection = ScrollDirections.down;
+    scrollDirection = ScrollDirections.right;
   } else {
-    scrollDirection = ScrollDirections.up;
+    scrollDirection = ScrollDirections.left;
   }
   currentOffset = offset;
 
-  const sectionHeight = sections[0].offsetHeight;
+  const sectionWidth = sections[0].offsetWidth / 2;
+  const threshold = sectionWidth / 3.5;
 
-  if (offset > sectionHeight) {
+  if (offset > sectionWidth) {
     document.querySelector(".back_top").classList.remove("btn_hidden");
   } else {
     document.querySelector(".back_top").classList.add("btn_hidden");
@@ -181,13 +183,15 @@ main.addEventListener("scroll", (e) => {
   let index = activeIndex;
 
   for (let i = 0; i < sections.length; i++) {
-    const offsetTop = sections[i].offsetTop;
-    const height = sections[i].offsetHeight;
+    const offsetLeft = sections[i].offsetLeft;
+    const offsetWidth = sections[i].offsetWidth;
 
-    if (offset > offsetTop && offset < offsetTop + height) {
+    if (
+      offset > offsetLeft - threshold &&
+      offset < offsetLeft + offsetWidth - threshold
+    ) {
       index = i;
     }
   }
   setActiveSection(index);
-  console.log("==========================================");
 });

@@ -106,3 +106,11 @@ nav.appendChild(ul);
 header.appendChild(nav);
 
 ///////////////////////////////////////////////////////////
+// Back to Top Button
+////////////////////////
+
+const backTopBtn = document.querySelector(".back_top");
+backTopBtn.addEventListener("click", () => {
+  const header = document.querySelector("header");
+  header.scrollIntoView(true);
+});

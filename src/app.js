@@ -149,10 +149,10 @@ let isScrolling;
 
 main.addEventListener("scroll", (e) => {
   window.clearTimeout(isScrolling);
-  document.querySelector("nav").classList.add("hidden");
+  document.querySelector("nav").classList.add("nav_hidden");
 
   isScrolling = window.setTimeout(() => {
-    document.querySelector("nav").classList.remove("hidden");
+    document.querySelector("nav").classList.remove("nav_hidden");
     console.log("Hidden");
   }, 300);
 
@@ -164,7 +164,14 @@ main.addEventListener("scroll", (e) => {
   }
   currentOffset = offset;
 
-  const threshold = sections[0].offsetHeight / 5.0;
+  const sectionHeight = sections[0].offsetHeight;
+
+  if (offset > sectionHeight) {
+    document.querySelector(".back_top").classList.remove("btn_hidden");
+  } else {
+    document.querySelector(".back_top").classList.add("btn_hidden");
+  }
+
   let index = activeIndex;
 
   for (let i = 0; i < sections.length; i++) {

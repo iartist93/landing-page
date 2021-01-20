@@ -24,6 +24,7 @@ body {
   font-weight: 600;
   font-size: 20px;
   border: 1px yellow solid;
+  transition: all 1s ease;
 }
 
 main {
@@ -57,8 +58,12 @@ nav {
   transition: all 1s ease;
 }
 
-.hidden {
+.nav_hidden {
   left: -100;
+}
+
+.btn_hidden {
+  right: -100;
 }
 
 nav ul {

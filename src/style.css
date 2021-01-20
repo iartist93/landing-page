@@ -6,11 +6,11 @@
 html,
 body {
   height: 100%;
-  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   background-color: black;
-  /* overflow: hidden; */
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .back_top {
@@ -26,8 +26,19 @@ body {
   border: 1px yellow solid;
 }
 
+main {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  /* scroll-snap-stop: always; */
+}
+
 section img {
   width: 100%;
+  scroll-snap-align: start;
 }
 
 header h1 {
@@ -92,4 +103,26 @@ li a {
   header h1 {
     font-size: 100px;
   }
+}
+
+.container {
+  height: 100%;
+  color: red;
+  overflow: scroll;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+.chlid {
+  position: relative;
+  scroll-snap-align: start;
+  justify-content: center;
+  border-bottom: 1px solid white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  font-size: 40px;
+  background-color: blue;
 }

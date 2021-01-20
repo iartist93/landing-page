@@ -78,6 +78,13 @@ ul.setAttribute("class", "main_nav");
 nav.appendChild(ul);
 const navDocumentFragment = new DocumentFragment();
 
+const setActiveSectionAndScroll = (index) => {
+  if (index != activeIndex) {
+    setActiveSection(index);
+    sections[index].scrollIntoView(true);
+  }
+};
+
 const setActiveSection = (index) => {
   if (index != activeIndex) {
     // query the section with this index
@@ -85,12 +92,12 @@ const setActiveSection = (index) => {
     const navitems = document.querySelectorAll(".nav_item");
 
     // toggle the active class on it
-    sections[index].classList.add("active_section");
-    navitems[index].classList.add("active_nav_item");
     sections[activeIndex].classList.remove("active_section");
     navitems[activeIndex].classList.remove("active_nav_item");
 
-    sections[index].scrollIntoView(true);
+    sections[index].classList.add("active_section");
+    navitems[index].classList.add("active_nav_item");
+
     activeIndex = index;
   }
 };
@@ -104,7 +111,8 @@ for (let i = 0; i < sectionList.length; i++) {
   }
   navItem.addEventListener("click", (event) => {
     event.preventDefault();
-    setActiveSection(i);
+    // setActiveNavItem(i);
+    setActiveSectionAndScroll(i);
   });
   navDocumentFragment.appendChild(navItem);
 }
@@ -129,30 +137,36 @@ backTopBtn.addEventListener("click", () => {
 const sections = document.querySelectorAll("section");
 const sectionsList = Array.from(sections);
 
-var isScrolling;
+const ScrollDirections = {
+  up: 1,
+  down: 0,
+};
+
+let currentOffset = main.scrollTop;
+let scrollDirection = ScrollDirections.down;
 
 main.addEventListener("scroll", (e) => {
-  // detect if still scrolling
-  window.clearTimeout(isScrolling);
+  const offset = main.scrollTop;
+  if (offset > currentOffset) {
+    scrollDirection = ScrollDirections.down;
+    console.log("down down down ");
+  } else {
+    scrollDirection = ScrollDirections.up;
+    console.log("up up up up ");
+  }
+  currentOffset = offset;
 
-  // run only when use done scrolling
-  isScrolling = window.setTimeout(() => {
-    let index = activeIndex;
-    let minDistance = 0;
+  const threshold = sections[0].offsetHeight / 5.0;
+  let index = activeIndex;
 
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i];
-      const dist = section.getBoundingClientRect().top;
-      if (Math.abs(dist) <= 10) {
-        index = i;
-        console.log(`section ${i} / dist ${dist}`);
-      }
+  for (let i = 0; i < sections.length; i++) {
+    const offsetTop = sections[i].offsetTop;
+    const height = sections[i].offsetHeight;
+
+    if (offset > offsetTop && offset < offsetTop + height) {
+      index = i;
     }
-    setActiveSection(index);
-
-    // if (minDistance > 0 && minDistance < 50) {
-    //   setActiveSection(index);
-    // }
-    console.log("------------------------------------------");
-  }, 100);
+  }
+  setActiveSection(index);
+  console.log("==========================================");
 });

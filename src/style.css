@@ -30,7 +30,7 @@ main {
   overflow-y: scroll;
   scroll-behavior: smooth;
   height: 100%;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   display: flex;
   flex-direction: column;
   /* scroll-snap-stop: always; */
@@ -38,7 +38,7 @@ main {
 
 section img {
   width: 100%;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
 
 header h1 {

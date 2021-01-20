@@ -7,6 +7,14 @@ const sectionList = [
   { title: "Epsoid 02", image: "/images/s01_e02.png" },
   { title: "Epsoid 03", image: "/images/s01_e03.png" },
   { title: "Epsoid 04", image: "/images/s01_e04.png" },
+  { title: "Epsoid 01", image: "/images/s01_e01.png" },
+  { title: "Epsoid 02", image: "/images/s01_e02.png" },
+  { title: "Epsoid 03", image: "/images/s01_e03.png" },
+  { title: "Epsoid 04", image: "/images/s01_e04.png" },
+  { title: "Epsoid 01", image: "/images/s01_e01.png" },
+  { title: "Epsoid 02", image: "/images/s01_e02.png" },
+  { title: "Epsoid 03", image: "/images/s01_e03.png" },
+  { title: "Epsoid 04", image: "/images/s01_e04.png" },
 ];
 
 ///////////////////////////////////////////////////////////
@@ -76,7 +84,6 @@ const setActiveSectionAndScroll = (index) => {
 
 const setActiveSection = (index) => {
   if (index != activeIndex) {
-    getElements();
     // toggle the active class on it
     sections[activeIndex].classList.remove("active_section");
     navitems[activeIndex].classList.remove("active_nav_item");
@@ -86,6 +93,14 @@ const setActiveSection = (index) => {
 
     activeIndex = index;
   }
+};
+
+const openSection = (index) => {
+  for (const section of sections) {
+    section.classList.add("section_collapse");
+    // section.firstChild.classList.add("section_collapse");
+  }
+  sections[index].classList.remove("section_collapse");
 };
 
 ///////////////////////////////////////////////////////////
@@ -123,12 +138,15 @@ for (let i = 0; i < sectionList.length; i++) {
   }
   navItem.addEventListener("click", (event) => {
     event.preventDefault();
+    openSection(i);
     setActiveSectionAndScroll(i);
   });
   navDocumentFragment.appendChild(navItem);
 }
 
 nav_ul.appendChild(navDocumentFragment);
+
+getElements();
 
 ///////////////////////////////////////////////////////////
 // Back to Top Button
@@ -155,7 +173,6 @@ let scrollDirection = ScrollDirections.right;
 let isScrolling;
 
 main.addEventListener("scroll", (e) => {
-  getElements();
   window.clearTimeout(isScrolling);
   document.querySelector("nav").classList.add("nav_hidden");
 
@@ -201,3 +218,13 @@ title.addEventListener("click", () => {
   const content = document.querySelector(".test_container_content");
   content.classList.toggle("test_container_toggle");
 });
+
+//////////////////////////////////////////////////////////
+
+sections.forEach((section, index) => {
+  section.classList.add("section_collapse");
+  section.addEventListener("click", () => {
+    openSection(index);
+  });
+});
+sections[0].classList.remove("section_collapse");

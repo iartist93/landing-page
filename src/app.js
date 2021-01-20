@@ -145,14 +145,22 @@ const ScrollDirections = {
 let currentOffset = main.scrollTop;
 let scrollDirection = ScrollDirections.down;
 
+let isScrolling;
+
 main.addEventListener("scroll", (e) => {
+  window.clearTimeout(isScrolling);
+  document.querySelector("nav").classList.add("hidden");
+
+  isScrolling = window.setTimeout(() => {
+    document.querySelector("nav").classList.remove("hidden");
+    console.log("Hidden");
+  }, 300);
+
   const offset = main.scrollTop;
   if (offset > currentOffset) {
     scrollDirection = ScrollDirections.down;
-    console.log("down down down ");
   } else {
     scrollDirection = ScrollDirections.up;
-    console.log("up up up up ");
   }
   currentOffset = offset;
 

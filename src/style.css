@@ -50,17 +50,20 @@ header h1 {
 
 nav {
   text-align: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: all 1s ease;
+}
+
+.hidden {
+  left: -100;
 }
 
 nav ul {
   margin: auto;
   padding: 15px 15px;
-  /* border: 2px yellow solid; */
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  /* height: 100%; */
   width: 100px;
   background-color: rgba(0, 0, 0, 0.3);
   color: rgb(5, 4, 4);
@@ -89,7 +92,7 @@ li a {
 }
 
 .active_section {
-  border: 3px yellow solid;
+  border: 3px #1a6a4d solid;
 }
 
 /* Smallest */

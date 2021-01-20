@@ -9,18 +9,18 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
+  background-color: black;
   /* overflow: hidden; */
 }
 
 .back_top {
-  color: red;
+  color: rgb(196, 219, 206);
   position: fixed;
   bottom: 10px;
   right: 20px;
   width: 70px;
   height: 50px;
-  color: yellow;
-  background-color: black;
+  background-color: 1a6a4d;
   font-weight: 600;
   font-size: 20px;
   border: 1px yellow solid;
@@ -33,32 +33,39 @@ section img {
 header h1 {
   font-size: 120px;
   text-align: center;
+  color: white;
+  padding-top: 50px;
 }
 
 nav {
-  margin: 0 auto;
   text-align: center;
-  width: 100%;
 }
 
 nav ul {
-  text-align: center;
-  background-color: black;
+  margin: auto;
+  padding: 15px 15px;
+  /* border: 2px yellow solid; */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  /* height: 100%; */
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.3);
   color: rgb(5, 4, 4);
   vertical-align: middle;
-  height: 45px;
-  width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   list-style: none;
 }
 
 nav li {
-  padding-top: 10px;
-  flex-flow: wrap row;
+  padding-top: 16px;
   font-size: 25px;
-  margin-right: 20px;
+  font-weight: 700;
   text-decoration: none;
-  color: rgb(243, 115, 115);
+  color: #7b0000;
 }
 
 li a {
@@ -67,25 +74,22 @@ li a {
 }
 
 .active_nav_item {
-  color: yellow;
+  color: #1a6a4d;
 }
 
 .active_section {
   border: 3px yellow solid;
 }
 
+/* Smallest */
 @media screen and (max-width: 580px) {
-  ul li {
-    padding-top: 9px;
-    font-size: 17px;
-    margin-right: 10px;
+  header h1 {
+    font-size: 70px;
   }
 }
 
 @media screen and (min-width: 580px) and (max-width: 800px) {
-  ul li {
-    padding-top: 14px;
-    font-size: 22px;
-    margin-right: 22px;
+  header h1 {
+    font-size: 100px;
   }
 }

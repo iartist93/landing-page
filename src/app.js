@@ -18,10 +18,10 @@ const createSectionWithImage = (imageURL, title) => {
 
 // database
 const sectionList = [
-  { title: "AOT S01 E01", image: "/images/s01_e01.png" },
-  { title: "AOT S01 E02", image: "/images/s01_e02.png" },
-  { title: "AOT S01 E03", image: "/images/s01_e03.png" },
-  { title: "AOT S01 E04", image: "/images/s01_e04.png" },
+  { title: "S01 E01", image: "/images/s01_e01.png" },
+  { title: "S01 E02", image: "/images/s01_e02.png" },
+  { title: "S01 E03", image: "/images/s01_e03.png" },
+  { title: "S01 E04", image: "/images/s01_e04.png" },
 ];
 
 // create a new fragment to hold the sections

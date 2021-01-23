@@ -3,18 +3,11 @@
 //////////////
 
 const sectionList = [
-  { title: "Epsoid 01", image: "/images/s01_e01.png" },
-  { title: "Epsoid 02", image: "/images/s01_e02.png" },
-  { title: "Epsoid 03", image: "/images/s01_e03.png" },
-  { title: "Epsoid 04", image: "/images/s01_e04.png" },
-  { title: "Epsoid 05", image: "/images/s01_e01.png" },
-  { title: "Epsoid 06", image: "/images/s01_e02.png" },
-  { title: "Epsoid 07", image: "/images/s01_e03.png" },
-  { title: "Epsoid 08", image: "/images/s01_e04.png" },
-  { title: "Epsoid 09", image: "/images/s01_e01.png" },
-  { title: "Epsoid 10", image: "/images/s01_e02.png" },
-  { title: "Epsoid 11", image: "/images/s01_e03.png" },
-  { title: "Epsoid 12", image: "/images/s01_e04.png" },
+  { title: "Soul", image: "/images2/soul.jpg" },
+  { title: "Onward", image: "/images2/Onward.png" },
+  { title: "Toy Stoy 4", image: "/images2/toystory4.jpg" },
+  { title: "Cars 3", image: "/images2/cars3.jpg" },
+  { title: "Coco", image: "/images2/coco.jpg" },
 ];
 
 ///////////////////////////////////////////////////////////
@@ -76,6 +69,7 @@ const getElements = () => {
 };
 
 const setActiveSectionAndScroll = (index) => {
+  // console.log(`A : ${index} ${activeIndex}`);
   if (index != activeIndex) {
     setActiveSection(index);
     sections[index].scrollIntoView(true);
@@ -83,6 +77,7 @@ const setActiveSectionAndScroll = (index) => {
 };
 
 const setActiveSection = (index) => {
+  console.log(`B : ${index} ${activeIndex}`);
   if (index != activeIndex) {
     // toggle the active class on it
     sections[activeIndex].classList.remove("active_section");
@@ -131,12 +126,14 @@ main.append(sectionDocumentFragment);
 const navDocumentFragment = new DocumentFragment();
 
 //TODO:Refactor and use delgetion instead
+/// Create a nav bar item for each section item
 for (let i = 0; i < sectionList.length; i++) {
   let section = sectionList[i];
   const navItem = createNavbarItem("#", section.title);
   if (i == 0) {
     navItem.classList.add("active_nav_item");
   }
+  // setup the nav item click function
   navItem.addEventListener("click", (event) => {
     event.preventDefault();
     setActiveSectionAndScroll(i);
@@ -173,44 +170,47 @@ let scrollDirection = ScrollDirections.right;
 let isScrolling;
 
 main.addEventListener("scroll", (e) => {
+  // clar the callback function while still scrolling
   window.clearTimeout(isScrolling);
+
+  // Set the navbar hiddent while scrolling
   document.querySelector("nav").classList.add("nav_hidden");
 
   isScrolling = window.setTimeout(() => {
     document.querySelector("nav").classList.remove("nav_hidden");
-  }, 200);
-
-  const offset = main.scrollLeft;
-  if (offset > currentOffset) {
-    scrollDirection = ScrollDirections.right;
-  } else {
-    scrollDirection = ScrollDirections.left;
-  }
-  currentOffset = offset;
-
-  const sectionWidth = sections[0].offsetWidth / 2;
-  const threshold = sectionWidth / 3.5;
-
-  if (offset > sectionWidth) {
-    document.querySelector(".back_top").classList.remove("btn_hidden");
-  } else {
-    document.querySelector(".back_top").classList.add("btn_hidden");
-  }
-
-  let index = activeIndex;
-
-  for (let i = 0; i < sections.length; i++) {
-    const offsetLeft = sections[i].offsetLeft;
-    const offsetWidth = sections[i].offsetWidth;
-
-    if (
-      offset > offsetLeft - threshold &&
-      offset < offsetLeft + offsetWidth - threshold
-    ) {
-      index = i;
+    const offset = main.scrollLeft;
+    if (offset > currentOffset) {
+      scrollDirection = ScrollDirections.right;
+    } else {
+      scrollDirection = ScrollDirections.left;
     }
-  }
-  setActiveSection(index);
+    currentOffset = offset;
+
+    const sectionWidth = sections[0].offsetWidth;
+    const threshold = sectionWidth / 3.5;
+
+    // Show the back button if we scroll after distance
+    if (offset > sectionWidth / 6) {
+      document.querySelector(".back_top").classList.remove("btn_hidden");
+    } else {
+      document.querySelector(".back_top").classList.add("btn_hidden");
+    }
+
+    // let index = activeIndex;
+
+    // // for (let i = 0; i < sections.length; i++) {
+    // //   const offsetLeft = sections[i].offsetLeft;
+    // //   const offsetWidth = sections[i].offsetWidth;
+
+    // //   if (
+    // //     offset > offsetLeft - threshold &&
+    // //     offset < offsetLeft + offsetWidth - threshold
+    // //   ) {
+    // //     index = i;
+    // //   }
+    // // }
+    // // setActiveSection(index);
+  }, 200);
 });
 
 const title = document.querySelector(".text_container_title");
@@ -220,11 +220,18 @@ title.addEventListener("click", () => {
 });
 
 //////////////////////////////////////////////////////////
+/// Sections Collpasing
+////////////////////////
 
+/// Close all sections
 sections.forEach((section, index) => {
   section.classList.add("section_collapse");
   section.addEventListener("click", () => {
-    openSection(index);
+    setActiveSection(index);
   });
 });
+
+/// Open the first section when the page inital load
 sections[0].classList.remove("section_collapse");
+
+//////////////////////////////////////////////////////////

@@ -3,11 +3,11 @@
 //////////////
 
 const sectionList = [
-  { title: "Soul", image: "/images2/soul.jpg" },
-  { title: "Onward", image: "/images2/Onward.png" },
-  { title: "Toy Stoy 4", image: "/images2/toystory4.jpg" },
-  { title: "Cars 3", image: "/images2/cars3.jpg" },
-  { title: "Coco", image: "/images2/coco.jpg" },
+  { title: "Soul", image: "src/images2/soul.jpg" },
+  { title: "Onward", image: "src/images2/Onward.png" },
+  { title: "Toy Stoy 4", image: "src/images2/toystory4.jpg" },
+  { title: "Cars 3", image: "src/images2/cars3.jpg" },
+  { title: "Coco", image: "src/images2/coco.jpg" },
 ];
 
 ///////////////////////////////////////////////////////////

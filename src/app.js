@@ -18,6 +18,7 @@ document.querySelector(".back_top").classList.add("btn_hidden");
 
 // Queries
 const main = document.querySelector("main");
+const posters = document.querySelector(".posters");
 const header = document.querySelector("header");
 const nav = document.querySelector("nav");
 const nav_ul = document.querySelector("nav ul");
@@ -69,15 +70,17 @@ const getElements = () => {
 };
 
 const setActiveSectionAndScroll = (index) => {
-  // console.log(`A : ${index} ${activeIndex}`);
   if (index != activeIndex) {
+    console.log(`A : ${index} ${activeIndex}`);
     setActiveSection(index);
+
+    console.log("I'm here man");
     sections[index].scrollIntoView(true);
   }
 };
 
 const setActiveSection = (index) => {
-  console.log(`B : ${index} ${activeIndex}`);
+  // console.log(`B : ${index} ${activeIndex}`);
   if (index != activeIndex) {
     // toggle the active class on it
     sections[activeIndex].classList.remove("active_section");
@@ -97,6 +100,11 @@ const openSection = (index) => {
     // section.firstChild.classList.add("section_collapse");
   }
   sections[index].classList.remove("section_collapse");
+
+  // const allSections = document.querySelectorAll("section");
+  // const lastSection = allSections[allSections.length - 1];
+  // console.log(lastSection);
+  // lastSection.scrollIntoView(true);
 };
 
 ///////////////////////////////////////////////////////////
@@ -117,7 +125,7 @@ for (let i = 0; i < sectionList.length; i++) {
 }
 
 // append the new sections to the main tag in one batch
-main.append(sectionDocumentFragment);
+posters.append(sectionDocumentFragment);
 
 ///////////////////////////////////////////////////////////
 // Nav bar
@@ -213,17 +221,17 @@ main.addEventListener("scroll", (e) => {
   }, 200);
 });
 
-const title = document.querySelector(".text_container_title");
-title.addEventListener("click", () => {
-  const content = document.querySelector(".test_container_content");
-  content.classList.toggle("test_container_toggle");
-});
+// const title = document.querySelector(".text_container_title");
+// title.addEventListener("click", () => {
+//   const content = document.querySelector(".test_container_content");
+//   content.classList.toggle("test_container_toggle");
+// });
 
 //////////////////////////////////////////////////////////
 /// Sections Collpasing
 ////////////////////////
 
-/// Close all sections
+// Close all sections
 sections.forEach((section, index) => {
   section.classList.add("section_collapse");
   section.addEventListener("click", () => {
@@ -231,7 +239,7 @@ sections.forEach((section, index) => {
   });
 });
 
-/// Open the first section when the page inital load
+// Open the first section when the page inital load
 sections[0].classList.remove("section_collapse");
 
 //////////////////////////////////////////////////////////

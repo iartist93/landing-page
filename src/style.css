@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Special Elite", serif;
+  font-family: "Quattrocento", "Special Elite", serif;
 }
 
 html,
@@ -23,43 +23,56 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1a6a4d;
+  background: yellow;
   border-radius: 20px;
   box-shadow: inset 0 0 5px grey;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #7b0000;
+  background: rgb(25, 164, 245);
   border-radius: 20px;
-  box-shadow: inset 2px 2px 10px 2px rgb(99, 29, 50);
+  box-shadow: inset 2px 2px 10px 2px rgb(76, 33, 186);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(172, 29, 52);
+  background: rgb(25, 164, 245);
 }
 
 .back_top {
-  color: #dbd2d2;
+  color: yellow;
   position: fixed;
   bottom: 30px;
   right: 10px;
   width: 70px;
   height: 50px;
-  background-color: 1a6a4d;
+  background-color: rgb(25, 164, 245);
   font-weight: 600;
   font-size: 20px;
   border: 1px yellow solid;
   transition: all 0.5s ease;
 }
 
+.title {
+  /* center the content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  width: 30%;
+}
+
 h1 {
-  font-size: 120px;
+  font-size: 100px;
   text-align: center;
   color: white;
-  padding-top: 50px;
-  padding-right: 50px;
+  margin: 20px;
+  /* border: 5px solid rgb(201, 201, 201); */
+  padding: 20px;
 }
 
 .btn_hidden {
@@ -77,20 +90,32 @@ main {
   overflow-y: hidden;
 }
 
+.posters {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
 .img_section_item {
   max-width: 100%;
+  min-height: 100%;
+
   transition: all 0.6s ease-in;
+  border: 1px rgb(92, 92, 245) solid;
 }
 
 .section_collapse {
   max-width: 75px;
-  /* width: 75px; */
-  border: 2px #1a6a4d solid;
+  min-width: 75px;
+  overflow: hidden;
 }
 
-section img {
+.img_section_item img {
+  max-height: 100%;
   min-height: 100%;
   min-width: 100%;
+  max-width: 1100px;
 }
 
 nav {
@@ -122,12 +147,12 @@ nav ul {
 }
 
 nav li {
-  padding-top: 9px;
-  padding-left: 20px;
+  padding-top: 2px;
+  padding-left: 30px;
   font-size: 25px;
   font-weight: 700;
   text-decoration: none;
-  color: #a82929;
+  color: rgb(25, 164, 245);
   /* box-shadow: 2px 2px 10px 2px rgb(99, 29, 50); */
   text-shadow: 1px 1px 4px #190a2b;
 }
@@ -138,7 +163,7 @@ li a {
 }
 
 .active_nav_item {
-  color: #1a6a4d;
+  color: #ea2d27;
 }
 
 .active_section {

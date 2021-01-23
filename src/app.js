@@ -7,14 +7,14 @@ const sectionList = [
   { title: "Epsoid 02", image: "/images/s01_e02.png" },
   { title: "Epsoid 03", image: "/images/s01_e03.png" },
   { title: "Epsoid 04", image: "/images/s01_e04.png" },
-  { title: "Epsoid 01", image: "/images/s01_e01.png" },
-  { title: "Epsoid 02", image: "/images/s01_e02.png" },
-  { title: "Epsoid 03", image: "/images/s01_e03.png" },
-  { title: "Epsoid 04", image: "/images/s01_e04.png" },
-  { title: "Epsoid 01", image: "/images/s01_e01.png" },
-  { title: "Epsoid 02", image: "/images/s01_e02.png" },
-  { title: "Epsoid 03", image: "/images/s01_e03.png" },
-  { title: "Epsoid 04", image: "/images/s01_e04.png" },
+  { title: "Epsoid 05", image: "/images/s01_e01.png" },
+  { title: "Epsoid 06", image: "/images/s01_e02.png" },
+  { title: "Epsoid 07", image: "/images/s01_e03.png" },
+  { title: "Epsoid 08", image: "/images/s01_e04.png" },
+  { title: "Epsoid 09", image: "/images/s01_e01.png" },
+  { title: "Epsoid 10", image: "/images/s01_e02.png" },
+  { title: "Epsoid 11", image: "/images/s01_e03.png" },
+  { title: "Epsoid 12", image: "/images/s01_e04.png" },
 ];
 
 ///////////////////////////////////////////////////////////
@@ -91,6 +91,7 @@ const setActiveSection = (index) => {
     sections[index].classList.add("active_section");
     navitems[index].classList.add("active_nav_item");
 
+    openSection(index);
     activeIndex = index;
   }
 };
@@ -138,7 +139,6 @@ for (let i = 0; i < sectionList.length; i++) {
   }
   navItem.addEventListener("click", (event) => {
     event.preventDefault();
-    openSection(i);
     setActiveSectionAndScroll(i);
   });
   navDocumentFragment.appendChild(navItem);

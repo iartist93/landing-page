@@ -126,7 +126,7 @@ nav {
   left: 0;
   right: 0;
   transition: all 0.1s ease;
-  box-shadow: 1px 1px 10px 1px rgb(99, 29, 50);
+  box-shadow: 1px -8px 20px 1px rgb(255, 217, 48);
 }
 
 .nav_hidden {
@@ -167,13 +167,35 @@ li a {
 }
 
 .active_section {
-  border: 3px #1a6a4d solid;
+  border: 1px #ea2d27 solid;
 }
 
 /* Smallest */
 @media screen and (max-width: 580px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+  .posters {
+    height: 50%;
+  }
+  .logo {
+    margin-top: 70px;
+    width: 25%;
+    /* border: 3px red solid; */
+  }
   h1 {
-    font-size: 70px;
+    font-size: 60px;
+    margin-top: 0;
+  }
+
+  nav ul {
+    height: 50px;
+  }
+
+  nav li {
+    font-size: 16px;
+    padding-right: 2px;
   }
 }
 

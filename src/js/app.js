@@ -43,6 +43,7 @@ const createSectionWithImage = (imageURL, title) => {
   image.setAttribute("src", imageURL);
   image.setAttribute("atl", title);
   section.appendChild(image);
+
   return section;
 };
 
@@ -62,25 +63,66 @@ const createNavbarItem = (url, lable) => {
 };
 
 const getElements = () => {
-  if (sections.length == 0) {
+  if (length == 0) {
     // query the section with this index
     sections = document.querySelectorAll(".img_section_item");
     navitems = document.querySelectorAll(".nav_item");
   }
 };
 
+/// NOTE: Can't slide more than the max width
+/// so all elements > 1 won't slide as there's no space to slide into
+/// only the switching between the first section
+// and any other section will have noticable sliding effect
 const setActiveSectionAndScroll = (index) => {
   if (index != activeIndex) {
-    console.log(`A : ${index} ${activeIndex}`);
+    openSection(index);
     setActiveSection(index);
 
-    console.log("I'm here man");
-    sections[index].scrollIntoView(true);
+    // wait a moment before sliding to give the open sections function its time
+    setTimeout(() => {
+      // check weither we're at mobile or at desktop
+      const mediaQuery1 = window.matchMedia("(max-width: 580px)");
+      const mediaQuery2 = window.matchMedia(
+        "(min-width: 580px) and (max-width: 1100px)"
+      );
+
+      if (mediaQuery1.matches || mediaQuery2.matches) {
+        // get the css min-width of the collapsed sections
+        const collapsedSection = document.querySelector(".section_collapse");
+        const collapsedSectionStyle = window.getComputedStyle(collapsedSection);
+        let minWidth = parseInt(
+          collapsedSectionStyle.getPropertyValue("min-width")
+        );
+        // check for NaN
+        if (minWidth !== minWidth) {
+          if (mediaQuery2.matches) minWidth = 40;
+          else minWidth = 30;
+        }
+        let x = 0;
+        if (index >= 1) x = index * minWidth;
+        posters.scrollTo({
+          left: x,
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        let x = 0;
+        if (index >= 1) {
+          // or just slide to max aviable width
+          x = sections[index].offsetLeft;
+        }
+        main.scrollTo({
+          left: x,
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    }, 300);
   }
 };
 
 const setActiveSection = (index) => {
-  // console.log(`B : ${index} ${activeIndex}`);
   if (index != activeIndex) {
     // toggle the active class on it
     sections[activeIndex].classList.remove("active_section");
@@ -89,21 +131,22 @@ const setActiveSection = (index) => {
     sections[index].classList.add("active_section");
     navitems[index].classList.add("active_nav_item");
 
-    openSection(index);
     activeIndex = index;
   }
 };
 
 const openSection = (index) => {
-  for (const section of sections) {
-    section.classList.add("section_collapse");
-    // section.firstChild.classList.add("section_collapse");
+  for (let i = 0; i < sections.length; i++) {
+    if (i === index) {
+      sections[i].classList.remove("section_collapse");
+    } else {
+      sections[i].classList.add("section_collapse");
+    }
   }
-  sections[index].classList.remove("section_collapse");
 
+  // section.firstChild.classList.add("section_collapse");
   // const allSections = document.querySelectorAll("section");
   // const lastSection = allSections[allSections.length - 1];
-  // console.log(lastSection);
   // lastSection.scrollIntoView(true);
 };
 
@@ -160,7 +203,8 @@ getElements();
 const backTopBtn = document.querySelector(".back_top");
 backTopBtn.addEventListener("click", () => {
   const header = document.querySelector("header");
-  header.scrollIntoView(true);
+  // header.scrollIntoView(true);
+  setActiveSectionAndScroll(0);
 });
 
 ///////////////////////////////////////////////////////////
@@ -235,7 +279,7 @@ main.addEventListener("scroll", (e) => {
 sections.forEach((section, index) => {
   section.classList.add("section_collapse");
   section.addEventListener("click", () => {
-    setActiveSection(index);
+    setActiveSectionAndScroll(index);
   });
 });
 

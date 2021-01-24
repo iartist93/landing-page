@@ -100,8 +100,7 @@ main {
 .img_section_item {
   max-width: 100%;
   min-height: 100%;
-
-  transition: all 0.6s ease-in;
+  transition: all 0.5s ease-in;
   border: 1px rgb(92, 92, 245) solid;
 }
 
@@ -135,8 +134,8 @@ nav {
 
 nav ul {
   margin: 0 auto;
-  padding: 15px 15px;
-  height: 60px;
+  padding: 10px;
+  height: 65px;
   background-color: rgba(10, 10, 10, 0.6);
   color: rgb(5, 4, 4);
   vertical-align: middle;
@@ -147,8 +146,9 @@ nav ul {
 }
 
 nav li {
-  padding-top: 2px;
-  padding-right: 30px;
+  padding: 10px;
+  /* margin-top: 2px; */
+  margin-right: 30px;
   font-size: 25px;
   font-weight: 700;
   text-decoration: none;
@@ -165,6 +165,8 @@ li a {
 
 .active_nav_item {
   color: #ea2d27;
+  background-color: rgba(228, 227, 161, 0.2);
+  border-radius: 2px;
 }
 
 .active_section {
@@ -184,10 +186,17 @@ li a {
     overflow-y: hidden;
   }
 
+  .img_section_item {
+    min-width: 100%;
+  }
+
+  .img_section_item img {
+    max-width: 400px;
+  }
+
   .section_collapse {
     max-width: 30px;
     min-width: 30px;
-    overflow: hidden;
   }
 
   .logo {
@@ -208,37 +217,57 @@ li a {
 
   nav li {
     font-size: 17px;
-    padding-right: 14px;
-    padding-top: 0;
+    margin-right: 1px;
+    margin-top: 0;
+    padding: 4px 8px;
   }
 }
 
-@media screen and (min-width: 580px) and (max-width: 800px) {
+@media screen and (min-width: 580px) and (max-width: 1100px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .posters {
+    height: 50%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .img_section_item {
+    min-width: 100%;
+  }
+
+  .img_section_item img {
+    max-width: 400px;
+  }
+
+  .section_collapse {
+    max-width: 40px;
+    min-width: 40px;
+  }
+
+  .logo {
+    margin-top: 120px;
+    margin-bottom: 0px;
+    width: 25%;
+    /* border: 3px red solid; */
+  }
   h1 {
     font-size: 100px;
+    margin-top: 0;
   }
-}
 
-.test_container {
-  color: white;
-  font-size: 20px;
-}
+  nav ul {
+    height: 90px;
+    padding-top: 20px;
+  }
 
-.text_container_title {
-  color: green;
-}
-.text_container_title a {
-  color: inherit;
-}
-
-.test_container_content {
-  background-color: wheat;
-  height: 100px;
-  transition: all 0.1s ease-in;
-  visibility: visible;
-}
-.test_container_toggle {
-  height: 0;
-  visibility: hidden;
-  color: blue;
+  nav li {
+    font-size: 30px;
+    margin-right: 20px;
+    margin-top: 0;
+    padding: 8px 12px;
+  }
 }
